@@ -20,7 +20,6 @@ public class TesteWeb {
         driver.manage().window().maximize();
         driver.get("https://www.chronosacademy.com.br");
     }
-
     @Test
     public void primeiroteste(){
 
