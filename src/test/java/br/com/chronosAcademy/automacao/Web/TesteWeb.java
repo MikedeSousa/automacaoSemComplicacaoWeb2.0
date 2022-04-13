@@ -19,20 +19,16 @@ public class TesteWeb {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.chronosacademy.com.br");
-
     }
-
     @Test
     public void primeiroteste(){
 
-        String xpathTitulo = "/html/body/div/div/div/div/div/section[2]/div[3]/div/div/div/div/div[1]/div/h4";
+        String xpathTitulo = "//section[2]//h4";
         WebElement txtTitulo = driver.findElement(By.xpath(xpathTitulo));
         String titulo = txtTitulo.getText();
         assertEquals("Porque Tempo É Conhecimento", titulo);
-        driver.findElement(By.linkText("Conheça Nossos Cursos")).click();  
-
+       // driver.findElement(By.linkText("Conheça Nossos Cursos")).click();
     }
-
     @After
     public void finalizaTeste(){
         driver.quit();
