@@ -1,6 +1,8 @@
 package br.com.chronosAcademy.automacao.Web;
 
 import br.com.chronosAcademy.core.Driver;
+import br.com.chronosAcademy.pages.CursoPage;
+import br.com.chronosAcademy.pages.PrincipalPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
@@ -15,21 +17,29 @@ public class TesteWeb {
 
     WebDriver driver;
     Driver driverWeb;
+    PrincipalPage principalPage;
+    CursoPage cursoPage;
 
     @Before
     public void inicializaTeste(){
         driverWeb = new Driver("chrome");
         driver = driverWeb.getDriver();
         driver.get("https://www.chronosacademy.com.br");
+        principalPage = new PrincipalPage(driver);
     }
+
     @Test
-    public void primeiroteste(){
-        String xpathTitulo = "//section[2]//h4";
-        WebElement txtTitulo = driver.findElement(By.xpath(xpathTitulo));
-        String titulo = txtTitulo.getText();
-        assertEquals("Porque Tempo É Conhecimento", titulo);
-       // driver.findElement(By.linkText("Conheça Nossos Cursos")).click();
+    public void primeiroTeste() {
+        assertEquals("Porque Tempo É Conhecimento", principalPage.getTitulo());
     }
+
+    @Test
+    public void segundoTeste(){
+        cursoPage = new CursoPage(driver);
+        principalPage.clickBotao();
+        assertEquals("Conheça todos os nossos cursos", cursoPage.getTitulo2());
+    }
+
     @After
     public void finalizaTeste(){
         driver.quit();
