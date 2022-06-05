@@ -32,21 +32,20 @@ public class LoginSteps {
         Driver.getDriver().get("https://advantageonlineshopping.com/");
         loginPage = new LoginPage();
         loginPage.clickBtnLogin();
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
     }
 
     @Quando("for realizado um clique fora da modal")
     public void forRealizadoUmCliqueForaDaModal() {
         loginPage.clickDivFecharModal();
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
     }
 
     @Então("a janela modal deve ser fechada")
-    public void aJanelaModalDeveSerFechada() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void aJanelaModalDeveSerFechada() throws Exception {
+        try {
+            loginPage.invisibilityOfBtnFechar();
+        } catch (Exception e) {
+            throw new Exception("A janela modal nao foi fechada");
+        }
     }
 
     @Quando("for realizado um clique no icone de fechar")
@@ -68,12 +67,12 @@ public class LoginSteps {
     public void osCamposDeLoginForemPreenchidosDaSeguinteForma(Map<String, String> map) {
         String login = map.get("login");
         String password = map.get("password");
-        boolean remenber = Boolean.parseBoolean(map.get("remember"));
+        boolean remember = Boolean.parseBoolean(map.get("remember"));
 
         loginPage.setInpUserName(login);
         loginPage.setInpPassword(password);
 
-        if(remenber) loginPage.clickInpRemember();
+        if (remember) loginPage.clickInpRemember();
 
     }
 
